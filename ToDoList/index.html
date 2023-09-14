@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .delete-btn {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html">Go Back</a>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input id="taskInput" type="text" placeholder="Enter a task">
+        <button id="addBtn">Add</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        // Function to add a task
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+
+            if (taskInput.value) {
+                var task = taskInput.value;
+                var tasks = getTasksFromStorage();
+                tasks.push(task);
+                saveTasksToStorage(tasks);
+
+                taskInput.value = "";
+                loadTasks();
+            }
+        }
+
+        // Function to load tasks
+        function loadTasks() {
+            var taskList = document.getElementById("taskList");
+            taskList.innerHTML = "";
+
+            var tasks = getTasksFromStorage();
+            tasks.forEach(task => {
+                var li = document.createElement("li");
+                li.innerText = task;
+
+                var deleteBtn = document.createElement("button");
+                deleteBtn.innerText = "Delete";
+                deleteBtn.className = "delete-btn";
+
+                deleteBtn.addEventListener("click", function () {
+                    deleteTask(task);
+                });
+
+                li.appendChild(deleteBtn);
+                taskList.appendChild(li);
+            });
+        }
+
+        // Function to delete a task
+        function deleteTask(task) {
+            var tasks = getTasksFromStorage();
+            var index = tasks.indexOf(task);
+            if (index !== -1) {
+                tasks.splice(index, 1);
+                saveTasksToStorage(tasks);
+                loadTasks();
+            }
+        }
+
+        // Function to get tasks from local storage
+        function getTasksFromStorage() {
+            var tasks = localStorage.getItem("tasks");
+            return tasks ? JSON.parse(tasks) : [];
+        }
+
+        // Function to save tasks to local storage
+        function saveTasksToStorage(tasks) {
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        // Event listener for add button
+        var addBtn = document.getElementById("addBtn");
+        addBtn.addEventListener("click", addTask);
+
+        // Event listener for enter key press
+        var taskInput = document.getElementById("taskInput");
+        taskInput.addEventListener("keydown", function (event) {
+            if (event.keyCode === 13) {
+                addTask();
+            }
+        });
+
+        // Load tasks on page load
+        loadTasks();
+    </script>
+</body>
+</html>
