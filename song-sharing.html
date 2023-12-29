@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Song Sharing</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Song Sharing</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Back</a></li>
+      </ul>
+    </nav>
+    <section>
+      <h2>Share Your Favorite Songs</h2>
+      <input type="text" id="songInput" placeholder="Enter song name" />
+      <button onclick="shareSong()">Share</button>
+      <ul id="songList"></ul>
+    </section>
+
+    <footer>
+      <p>&copy; 2023 My Personal Homepage. All rights reserved.</p>
+    </footer>
+
+    <script>
+      function shareSong() {
+        var songInput = document.getElementById("songInput");
+        var songList = document.getElementById("songList");
+
+        var newSong = document.createElement("li");
+        newSong.innerText = songInput.value;
+        songList.appendChild(newSong);
+
+        songInput.value = "";
+      }
+    </script>
+  </body>
+</html>
