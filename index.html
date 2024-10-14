@@ -1,24 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>My Personal Homepage</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Welcome to My Personal Homepage</h1>
-    </header>
+<head>
+    <title>LLM API Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label, select, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #response {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
 
-    <nav>
-      <ul>
-        <li><a href="food.html">Food</a></li>
-        <li><a href="music.html">Music</a></li>
-        <li><a href="song-sharing.html">Song Sharing</a></li>
-      </ul>
-    </nav>
+    <h1>LLM API Tester</h1>
 
-    <footer>
-      <p>&copy; 2023 My Personal Homepage. All rights reserved.</p>
-    </footer>
-  </body>
+    <label for="llmType">Select LLM Type:</label>
+    <select id="llmType">
+        <option value="spark">Spark</option>
+        <option value="azure gpt">Azure GPT</option>
+    </select>
+
+    <label for="inputStatement">Enter Input Statement:</label>
+    <input type="text" id="inputStatement" placeholder="Type your statement here">
+
+    <button id="submitButton">Submit</button>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const llmType = document.getElementById('llmType').value;
+            const inputStatement = document.getElementById('inputStatement').value;
+            console.log('llmType:', llmType);
+            console.log('inputStatement:', inputStatement);
+            if (!inputStatement.trim()) {
+                alert('Please enter an input statement.');
+                return;
+            }
+
+            const requestBody = {
+                llmType: llmType,
+                input_statement: inputStatement
+            };
+
+            fetch('https://openai-poc-api-as1.azurewebsites.net/api/langchain/test', {
+                method: 'POST',
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const content = data.response.kwargs.content;
+                document.getElementById('response').innerText = `Response: ${content}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('response').innerText = 'An error occurred. Please try again.';
+            });
+        });
+    </script>
+
+</body>
 </html>
