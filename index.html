@@ -1,83 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Switch between LLMs</title>
-  <style>
-    #inputStatement {
-      width: 80%;
-      height: 100px;
-      padding: 10px;
-      font-size: 16px;
-    }
-    #response {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #ff0000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgb(0, 0, 0);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0 0 20px;
+        }
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .link {
+            text-decoration: none;
+            padding: 15px;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .link:hover {
+            background: #218838;
+        }
+        @media (min-width: 600px) {
+            .link-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .link {
+                flex: 1;
+                margin: 0 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>DEMO: Switching Between AI LLMs</h1>
-  <h2>Please select a Large Language Model:</h2>
-  
-  <!-- Form for selecting LLM and input statement -->
-  <form id="llmForm">
-    <label for="azureLLM">Microsoft: Azure OpenAI GPT-4</label>
-    <input type="radio" id="azureLLM" name="llmType" value="azure" checked />
-    
-    <label for="sparkLLM">Spark LLM (科大訊飛 &mdash; 訊飛星火大模型)</label>
-    <input type="radio" id="sparkLLM" name="llmType" value="spark" />
-    
-    <br /><br />
-    Please input the text below:
-    <br />
-    <textarea id="inputStatement" name="input_statement"></textarea>
-    <br /><br />
-    <input type="submit" value="Submit" />
-  </form>
-
-  <!-- This section will display the response -->
-  <div id="response"></div>
-
-  <script>
-    // JavaScript to handle form submission using fetch API
-    document.getElementById("llmForm").addEventListener("submit", function (e) {
-      e.preventDefault(); // Prevent page reload
-      
-      // Get selected LLM type and input statement
-      const llmType = document.querySelector('input[name="llmType"]:checked').value;
-      const inputStatement = document.getElementById("inputStatement").value;
-
-      // Create request body
-      const requestBody = {
-        llmType: llmType,
-        input_statement: inputStatement
-      };
-
-      // Clear the response area before making a request
-      document.getElementById("response").innerText = "Processing...";
-
-      // Make API call using fetch
-      fetch('https://openai-poc-api.edcity.hk/api/langchain/test', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Update the response div with the data returned by the API
-        document.getElementById("response").innerText = `Response from API: ${data.response.kwargs.content}`;
-      })
-      .catch(error => {
-        // Handle any errors
-        document.getElementById("response").innerText = `Error: ${error.message}`;
-      });
-    });
-  </script>
+    <header>
+        <h1>Welcome to My Main Page</h1>
+    </header>
+    <main>
+        <h2>Useful Links</h2>
+        <div class="link-container">
+            <a class="link" href="https://stsair.github.io/dashboard" target="_blank">Dashboard</a>
+            <a class="link" href="https://stsair.github.io/test-page" target="_blank">Testing Page</a>
+            <!-- Add more links here in the future -->
+        </div>
+    </main>
 </body>
 </html>
