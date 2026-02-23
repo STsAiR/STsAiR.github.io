@@ -24,7 +24,7 @@ function App() {
         <h2>Hello, world!</h2>
         <p>
           This is a minimal Vite + React app. Later you'll add Google SSO and
-          the cards UI here.
+          the cards UI here
         </p>
       </main>
     </div>
