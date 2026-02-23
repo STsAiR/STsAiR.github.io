@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div
+      style={{
+        fontFamily:
+          'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial',
+        padding: 20,
+      }}
+    >
+      <header
+        style={{
+          borderBottom: "1px solid #eee",
+          paddingBottom: 12,
+          marginBottom: 20,
+        }}
+      >
+        <h1 style={{ margin: 0 }}>My Daily Cards</h1>
+      </header>
+      <main>
+        <h2>Hello, world!</h2>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          This is a minimal Vite + React app. Later you'll add Google SSO and
+          the cards UI here.
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
