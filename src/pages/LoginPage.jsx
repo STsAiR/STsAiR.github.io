@@ -108,7 +108,8 @@ export default function LoginPage() {
       {!CLIENT_ID && (
         <div style={{ marginTop: 12 }}>
           <p style={{ color: "#555" }}>
-            No VITE_GOOGLE_CLIENT_ID set. Use the demo sign-in for local testing
+            No VITE_GOOGLE_CLIENT_ID set. Use the demo sign-in for local
+            testing.
           </p>
           <button onClick={demoSignIn} style={{ padding: "8px 12px" }}>
             Sign in (demo)
